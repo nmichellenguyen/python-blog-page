@@ -1,0 +1,25 @@
+{% extends "layout.html" %} {% block title %}Index{% endblock %} {% block head
+%}
+{{ super() }}
+<style type="text/css">
+  .important {
+    color: #336699;
+  }
+</style>
+{% endblock %} {% block content %}
+<h1>Index</h1>
+<p class="important">
+  Welcome on my awesome homepage.
+</p>
+
+<h1>
+  Make a new post
+</h1>
+
+<form>
+  <p>Post title<input type="text" name="title" /></p>
+  <p>Post content<input type="text" name="content" /></p>
+  <p>Post author<input type="text" name="author" /></p>
+  <button type="submit" value="submit">Create</button>
+</form>
+{% endblock %}
