@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 db = SQLAlchemy(app)
 
@@ -35,16 +36,16 @@ def posts():
 def create():
     error = None
     if request.method == 'POST':
-        if request.form['username'] != 'admin' or \
-                request.form['password'] != 'secret':
-            error = 'Invalid credentials'
+        if request.form['title'] is null or \
+                request.form['content'] is null:
+            error = 'Error during model creation'
         else:
-            flash('You were successfully logged in')
-            return redirect(url_for('index'))
+            flash('Posted created')
+            return redirect(url_for('posts'))
 
         # access the data using request.form['field_name']
         # save it to the database
         # return a redirect to /posts
         # the code below is executed if the request method
         # was GET or the credentials were invalid
-    return render_template('create.html')
+    return render_template('create.html', error=error)
